@@ -96,7 +96,7 @@
 	{#each whitelistedEmails as email}
 		<Tag value={email} on:delete={deleteWhitelistedEmail} />
 	{/each}
-	<TextInput on:save={newWhitelistedKeyword}>Whitelist addresses</TextInput>
+	<TextInput on:save={newWhitelistedKeyword}>Whitelist Keywords</TextInput>
 	{#each whitelistedKeywords as keyword}
 		<Tag value={keyword} on:delete={deleteWhitelistedKeyword}>{email}</Tag>
 	{/each}
