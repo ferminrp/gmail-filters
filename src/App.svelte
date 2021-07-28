@@ -1,10 +1,10 @@
 <script>
 	import TextInput from "./UI/TextInput.svelte";
 	//import customFilteredAddresses from "./filterStore";
-	import Tag from './UI/Tag.svelte'
+	import Tag from "./UI/Tag.svelte";
 
 	// Manejo de blacklist de emails
-	
+
 	let filteredAccounts = [];
 	function newBlockedAddress(event) {
 		// check if filteredAccounts contains event.detail
@@ -14,52 +14,91 @@
 		}
 	}
 
-	function deleteEmail(event){
-		console.log("Borrando "+event.detail);
+	function deleteEmail(event) {
+		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
-		filteredAccounts = filteredAccounts.filter(function(item){
+		filteredAccounts = filteredAccounts.filter(function (item) {
 			return item !== event.detail;
 		});
 	}
-
 
 	// Manejo de blacklist de keywords
 
 	let filteredKeywords = [];
 	function newBlockedKeyword(event) {
-		filteredKeywords = filteredKeywords.concat(event.detail);
+		if (filteredKeywords.indexOf(event.detail) === -1) {
+			filteredKeywords = filteredKeywords.concat(event.detail);
+		}
 	}
 
-	function deleteFilteredKeyword(event){
-		console.log("Borrando "+event.detail);
+	function deleteFilteredKeyword(event) {
+		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
-		filteredKeywords = filteredKeywords.filter(function(item){
+		filteredKeywords = filteredKeywords.filter(function (item) {
 			return item !== event.detail;
 		});
 	}
 
+	// Manejo de whitelist de emails
+
+	let whitelistedEmails = [];
+	function newWhitelistedEmail(event) {
+		if (whitelistedEmails.indexOf(event.detail) === -1) {
+			whitelistedEmails = whitelistedEmails.concat(event.detail);
+		}
+	}
+
+	function deleteWhitelistedEmail(event) {
+		console.log("Borrando " + event.detail);
+		// Delete event.detail from filteredAccounts
+		whitelistedEmails = whitelistedEmails.filter(function (item) {
+			return item !== event.detail;
+		});
+	}
+
+	// Manejo de whitelist de emails
+
+	let whitelistedKeywords = [];
+	function newWhitelistedKeyword(event) {
+		if (whitelistedKeywords.indexOf(event.detail) === -1) {
+			whitelistedKeywords = whitelistedKeywords.concat(event.detail);
+		}
+	}
+
+	function deleteWhitelistedKeyword(event) {
+		console.log("Borrando " + event.detail);
+		// Delete event.detail from filteredAccounts
+		whitelistedKeywords = whitelistedKeywords.filter(function (item) {
+			return item !== event.detail;
+		});
+	}
 </script>
 
 <main>
 	<h1>Create gmail filters faster</h1>
 
-	<TextInput on:save="{newBlockedAddress}">What accounts do you wanna filter?</TextInput>
-	
+	<TextInput on:save={newBlockedAddress}
+		>What email addresses do you wanna filter?</TextInput
+	>
+
 	{#each filteredAccounts as email}
-	<Tag value="{email}" on:delete="{deleteEmail}"></Tag>
+		<Tag value={email} on:delete={deleteEmail} />
 	{/each}
 
-	<TextInput on:save="{newBlockedKeyword}">What keywords do you wanna filter?</TextInput>
+	<TextInput on:save={newBlockedKeyword}
+		>What keywords do you wanna filter?</TextInput
+	>
 	{#each filteredKeywords as keyword}
-	<Tag on:delete="{deleteFilteredKeyword}" value="{keyword}"></Tag>
+		<Tag on:delete={deleteFilteredKeyword} value={keyword} />
 	{/each}
-	<TextInput>Whitelist Keywords</TextInput>
-	{#each filteredAccounts as email}
-	<Tag>{email}</Tag>
+
+	<TextInput on:save={newWhitelistedEmail}>Whitelist Email Addresses</TextInput>
+	{#each whitelistedEmails as email}
+		<Tag value={email} on:delete={deleteWhitelistedEmail} />
 	{/each}
-	<TextInput>Whitelist addresses</TextInput>
-	{#each filteredAccounts as email}
-	<Tag>{email}</Tag>
+	<TextInput on:save={newWhitelistedKeyword}>Whitelist addresses</TextInput>
+	{#each whitelistedKeywords as keyword}
+		<Tag value={keyword} on:delete={deleteWhitelistedKeyword}>{email}</Tag>
 	{/each}
 </main>
 
