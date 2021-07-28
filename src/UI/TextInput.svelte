@@ -5,17 +5,23 @@
     export let placeholder;
 
     function save(event) {
+        console.log(event.key)
         if (event.key == "Enter") {
             console.log("dispatchig " + value);
             dispatch('save', value);
             value = "";
             //console.log("Enter"+value);
+        } else if (event.key == ",") {
+            value = value.replace(',','')
+            console.log("dispatchig " + value);
+            dispatch('save', value);
+            value = "";
         }
     }
 </script>
 
 <p><slot><!-- optional fallback --></slot></p>
-<input on:keydown={save} type="text" bind:value {placeholder} />
+<input on:keyup={save} type="text" bind:value {placeholder} />
 
 <style>
     input {
