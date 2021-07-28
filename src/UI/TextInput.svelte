@@ -5,15 +5,12 @@
     export let placeholder;
 
     function save(event) {
-        console.log(event.key)
         if (event.key == "Enter" && value.length > 0) {
-            console.log("dispatchig " + value);
             dispatch('save', value);
             value = "";
             //console.log("Enter"+value);
         } else if (event.key == "," && value.length > 1) {
             value = value.replace(',','')
-            console.log("dispatchig " + value);
             dispatch('save', value);
             value = "";
         }

@@ -5,7 +5,6 @@
 
 
     function eliminar() {
-        console.log("dispatchig delete " + value);
         dispatch('delete', value);
     }
 </script>

@@ -15,7 +15,6 @@
 	}
 
 	function deleteEmail(event) {
-		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
 		filteredAccounts = filteredAccounts.filter(function (item) {
 			return item !== event.detail;
@@ -32,7 +31,6 @@
 	}
 
 	function deleteFilteredKeyword(event) {
-		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
 		filteredKeywords = filteredKeywords.filter(function (item) {
 			return item !== event.detail;
@@ -49,7 +47,6 @@
 	}
 
 	function deleteWhitelistedEmail(event) {
-		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
 		whitelistedEmails = whitelistedEmails.filter(function (item) {
 			return item !== event.detail;
@@ -66,7 +63,6 @@
 	}
 
 	function deleteWhitelistedKeyword(event) {
-		console.log("Borrando " + event.detail);
 		// Delete event.detail from filteredAccounts
 		whitelistedKeywords = whitelistedKeywords.filter(function (item) {
 			return item !== event.detail;
