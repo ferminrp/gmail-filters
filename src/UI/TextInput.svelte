@@ -1,16 +1,21 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
     export let value = "";
     export let placeholder;
 
-    function save(event){
-        if (event.key == "Enter"){
-        console.log("Enter"+value);
+    function save(event) {
+        if (event.key == "Enter") {
+            console.log("dispatchig " + value);
+            dispatch('save', value);
+            value = "";
+            //console.log("Enter"+value);
         }
     }
 </script>
 
 <p><slot><!-- optional fallback --></slot></p>
-<input on:keydown="{save}" type="text" bind:value {placeholder} />
+<input on:keydown={save} type="text" bind:value {placeholder} />
 
 <style>
     input {

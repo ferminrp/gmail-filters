@@ -1,11 +1,17 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    export let value = "";
+
+
     function eliminar() {
-        console.log("test");
+        console.log("dispatchig delete " + value);
+        dispatch('delete', value);
     }
 </script>
 
 <div>
-    <span><slot /></span>
+    <span>{value}</span>
     <span on:click={eliminar} class="material-icons-outlined"> cancel </span>
 </div>
 
